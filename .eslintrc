@@ -1,0 +1,15 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends":[
+        "eslint:recommended",
+        "plugins:@typescript-eslint/eslint-recommended",
+        "plugins:@typescript-eslint/recommended",
+        "plugins:prettier/recommended"
+    ],
+    "rules":{
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any":"error"
+    }
+}
