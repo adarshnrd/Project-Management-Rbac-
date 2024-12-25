@@ -1,13 +1,16 @@
-import { Column } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { ModelTemplate } from './modelTemplate';
 
-export class User extends ModelTemplate {
+@Entity({ name: 'users' })
+export class UserModel extends ModelTemplate {
   @Column('text', { nullable: false })
   firstName: string;
   @Column('text', { nullable: true })
   lastName: string | null;
-  @Column('text', { nullable: false })
+  @Column('text', { nullable: false, unique: true })
   email: string;
   @Column('text', { nullable: true })
   phone: number | null;
+  @Column('text')
+  companyName: string | null;
 }

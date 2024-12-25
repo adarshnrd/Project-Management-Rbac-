@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Your Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        a.button {
+            display: inline-block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a.button img {
+            width: 24px;
+            height: 24px;
+            max-width: 100%;
+            max-height: 100%;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Validate Your Email</h1>
+
+        {{#if error}}
+        <p class="error">{{error}}</p>
+        {{/if}}
+
+        <p>Thank you for signing up! Please check your email for a verification link.</p>
+        <p>If you haven't received the email, you can click the link below to resend the verification link:</p>
+
+        <div class="button-container">
+            <a class="button" href="https://mail.google.com" target="_blank">
+                <img src="./images/gmail.png" alt="Gmail" style="width: 32px; height: 32px;"> Open Gmail
+            </a>
+            <a class="button" href="https://outlook.live.com" target="_blank">
+                <img src="./images/outlook.png" alt="Outlook" style="width: 32px; height: 32px;"> Open Outlook
+            </a>
+            <a class="button" href="{{resendVerificationLink}}" target="_self">
+                <img src="./images/rotate-arrow.png" alt="Outlook" style="width: 32px; height: 32px;">Re-Edit Email
+            </a>
+            <a class="button" href="/" target="_self">
+                <img src="./images/home-button.png" alt="Home" style="width: 32px; height: 32px;"> Home Page
+            </a>
+        </div>
+
+        <p>If you face any issues, feel free to contact support.</p>
+    </div>
+</body>
+
+</html>

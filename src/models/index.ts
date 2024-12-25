@@ -1,7 +1,7 @@
-import { User } from './user';
+import { UserModel } from './userModel';
 
 /**
  * Mention all models created in models array
  */
-export const MODELS = [User];
+export const MODELS = [UserModel];
 export const VIEWS = [];
