@@ -7,8 +7,8 @@ export const UserSchema = joi.object({
   companyName: joi.string(),
   phone: joi
     .string()
-    .pattern(/^\+?[1-9]\d{1,14}$/) // Matches E.164 format
-    .required()
+    .pattern(/^\+?[1-9]\d{1,14}$/)
+    .min(10)
     .messages({
       'string.pattern.base': 'Phone number must be in a valid international format.',
     }),

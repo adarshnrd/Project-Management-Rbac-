@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validate Your Email</title>
+    <title>OTP Verification</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,75 +25,120 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .button-container {
+        form {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            width: 95%;
+        }
+
+        .button {
+            padding: 10px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .button:hover {
+            background-color: #574bdb;
+        }
+
+        .button:disabled {
+            background-color: #d3d3d3;
+            color: #a1a1a1;
+            cursor: not-allowed;
+        }
+
+        .info {
+            font-size: 14px;
+            color: gray;
+            text-align: center;
             margin-top: 20px;
         }
 
-        a.button {
-            display: inline-block;
-            text-align: center;
-            padding: 10px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 16px;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        a.button img {
-            width: 24px;
-            height: 24px;
-            max-width: 100%;
-            max-height: 100%;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        .error {
-            color: red;
-            font-size: 0.9em;
-            text-align: center;
+        /* Add space between buttons */
+        #resend-button {
+            margin-top: 20px;
+            /* Adjust the value to increase or decrease the space */
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Validate Your Email</h1>
+        <h1>OTP Verification</h1>
 
-        {{#if error}}
-        <p class="error">{{error}}</p>
-        {{/if}}
+        <form action="/verify-otp" method="POST">
+            <div class="form-group">
+                <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+            </div>
+            <input type="hidden" name="email" value="{{userEmail}}">
+            <button type="submit" class="button">Verify OTP</button>
+        </form>
 
-        <p>Thank you for signing up! Please check your email for a verification link.</p>
-        <p>If you haven't received the email, you can click the link below to resend the verification link:</p>
+        <button id="resend-button" class="button" disabled title="Please try again after 30sec.">Resend
+            OTP</button>
 
-        <div class="button-container">
-            <a class="button" href="https://mail.google.com" target="_blank">
-                <img src="./images/gmail.png" alt="Gmail" style="width: 32px; height: 32px;"> Open Gmail
-            </a>
-            <a class="button" href="https://outlook.live.com" target="_blank">
-                <img src="./images/outlook.png" alt="Outlook" style="width: 32px; height: 32px;"> Open Outlook
-            </a>
-            <a class="button" href="{{resendVerificationLink}}" target="_self">
-                <img src="./images/rotate-arrow.png" alt="Outlook" style="width: 32px; height: 32px;">Re-Edit Email
-            </a>
-            <a class="button" href="/" target="_self">
-                <img src="./images/home-button.png" alt="Home" style="width: 32px; height: 32px;"> Home Page
-            </a>
-        </div>
-
-        <p>If you face any issues, feel free to contact support.</p>
+        <p class="info">If you haven't received the email, please check your spam or junk folder as well.</p>
     </div>
+
+    <script>
+        // Enable the Resend OTP button after 1 minute
+        const resendButton = document.getElementById('resend-button');
+        setTimeout(() => {
+            resendButton.disabled = false;
+        }, 5000);
+
+        // Add event listener to Resend OTP button
+        resendButton.addEventListener('click', () => {
+            if (!resendButton.disabled) {
+                fetch('/resend-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ action: 'resend_otp' })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('OTP has been resent successfully.');
+                        } else {
+                            alert('Failed to resend OTP. Please try again later.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+            }
+        });
+    </script>
 </body>
 
 </html>

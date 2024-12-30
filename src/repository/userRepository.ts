@@ -1,6 +1,6 @@
 import { AppDataSource } from 'src/config';
 import { UserModel } from 'src/models/userModel';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
 export default class UserRepository {
   private _userRepository: Repository<UserModel>;
@@ -10,5 +10,15 @@ export default class UserRepository {
 
   public async addUserData(userModel: UserModel): Promise<void> {
     await this._userRepository.save(userModel);
+  }
+  public async getUserData(email: string): Promise<UserModel | null> {
+    return await this._userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+  }
+  public async update(userModel: Partial<UserModel>, email: string): Promise<UpdateResult> {
+    return await this._userRepository.update({ email }, userModel);
   }
 }

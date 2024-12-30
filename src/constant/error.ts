@@ -10,6 +10,3 @@ export const ERROR_CODES_MESSAGE = {
   504: 'Gateway Timeout: The server, while acting as a gateway or proxy, did not get a response in time.',
   422: 'Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.',
 };
-
-// You can add more error codes as needed
-module.exports = ERROR_CODES_MESSAGE;

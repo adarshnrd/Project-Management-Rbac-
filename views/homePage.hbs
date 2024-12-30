@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #0056b3;
+        }
+
+        .project-list {
+            text-align: left;
+        }
+
+        .project-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .project-item h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .project-item p {
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Project Management</h1>
+        <p class="welcome-message">Easily manage your projects, tasks, and teams all in one place.</p>
+
+        <div class="nav-links">
+            <a href="/createProject">Create New Project</a>
+            <a href="/allProjects">View All Projects</a>
+            <a href="/profile">Profile</a>
+        </div>
+
+        <div class="project-list">
+            <h2>Recent Projects</h2>
+            {{#if projects}}
+            {{#each projects}}
+            <div class="project-item">
+                <h3>{{this.name}}</h3>
+                <p>{{this.description}}</p>
+                <a href="/project/{{this.id}}" class="view-project">View Project</a>
+            </div>
+            {{/each}}
+            {{else}}
+            <p>No projects found. Start by creating a new project!</p>
+            {{/if}}
+        </div>
+    </div>
+</body>
+
+</html>

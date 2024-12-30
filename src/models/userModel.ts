@@ -7,10 +7,12 @@ export class UserModel extends ModelTemplate {
   firstName: string;
   @Column('text', { nullable: true })
   lastName: string | null;
-  @Column('text', { nullable: false, unique: true })
+  @Column('varchar', { nullable: false, unique: true })
   email: string;
   @Column('text', { nullable: true })
   phone: number | null;
   @Column('text')
   companyName: string | null;
+  @Column('boolean', { default: false })
+  verifiedUser: boolean;
 }

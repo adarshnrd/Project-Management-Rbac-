@@ -2,3 +2,10 @@ node_modules/
 jspm_packages/
 
 .env
+
+# VSCode
+
+.vscode
+.vscode/settings.json
+src/data/*.json
+.DS_Store

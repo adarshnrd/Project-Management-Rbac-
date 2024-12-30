@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .error-message {
+            color: #cc0000;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .error-details {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Oops! Something went wrong</h1>
+        <img src="./images/warning.png" alt="Home" style="width: 32px; height: 32px;">
+        <p class="error-message">{{errorMessage}}</p>
+        {{#if errorDetails}}
+        <p class="error-details">Details: {{errorDetails}}</p>
+        {{/if}}
+        <div class="back-link">
+            <a href="{{homeUrl}}">Go back to the homepage</a>
+        </div>
+    </div>
+</body>
+
+</html>
