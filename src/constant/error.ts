@@ -10,3 +10,16 @@ export const ERROR_CODES_MESSAGE = {
   504: 'Gateway Timeout: The server, while acting as a gateway or proxy, did not get a response in time.',
   422: 'Unprocessable Entity: The request was well-formed but was unable to be followed due to semantic errors.',
 };
+
+export const ERROR_MESSAGE_FOR_DUPLICATE_EMAIL_ENTRY =
+  'The email address already exists. You can either create an account using a new email or reset the password for the existing email.';
+export const OTP_MAX_ATTEMPTED_ERROR_MESSAGE =
+  'You have exceeded the maximum number of OTP attempts. Please verify your identity again.';
+export const SOMETHING_WENT_WRONG = 'Something went wrong. Please try again later.';
+export const PASSWORD_NOT_SAVED_ERROR =
+  'An error occurred, and the password could not be saved. Please try again later.';
+export const USER_NOT_FOUND_WITH_EMAIL = `We couldn't find a user associated with this email. Please contact us or create a new account.`;
+export const ENTERED_WRONG_USER_PASSWORD = (count: number) =>
+  count < 3
+    ? `Incorrect password. Please try again.`
+    : `The password you entered is incorrect. Please check your password and try again. If you've forgotten your password, click on 'Forgot Password' to reset it.`;

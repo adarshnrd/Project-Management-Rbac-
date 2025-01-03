@@ -8,7 +8,6 @@ signInRouter.get('/signIn', (req: Request, res: Response) => {
 });
 
 signInRouter.post('/signIn', (req: Request, res: Response) => {
-  console.log('hello to signIn');
   new SignIn().validateLogin(req, res);
   return;
 });

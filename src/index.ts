@@ -5,11 +5,10 @@ import path from 'path';
 
 import router from './routes';
 import { AppDataSource } from './config';
+import { APP_PORT } from './constant';
 
 config();
 const app: Application = express();
-const port = process.env.PORT;
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.disable('x-powered-by');
@@ -28,6 +27,6 @@ app.use(router);
   await AppDataSource.initialize();
 })();
 
-app.listen(port, () => {
-  console.log(`Server started on port http://localhost:${port} `);
+app.listen(APP_PORT, () => {
+  console.log(`Server started on port http://localhost:${APP_PORT} `);
 });

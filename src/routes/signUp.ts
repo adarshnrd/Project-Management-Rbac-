@@ -5,8 +5,7 @@ import PmContext from '../helper/pmContext';
 export const signUpRouter = Router();
 
 signUpRouter.get('/signUp', (req, res) => {
-  // return res.render('signUp');
-  return res.render('homePage');
+  return res.render('signUp');
 });
 
 signUpRouter.post('/signUp', (req: Request, res: Response) => {

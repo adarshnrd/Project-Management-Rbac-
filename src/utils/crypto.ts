@@ -11,7 +11,7 @@ export class CryptoDataEncryption {
   }
 
   // Function to encrypt email content
-  public encryptEmail(content: string): string {
+  public static encryptEmail(content: string): string {
     const key = CryptoDataEncryption.generateKey(CryptoDataEncryption.secretKey); // Use hashed key
     const iv = crypto.randomBytes(16); // 16-byte random IV for AES-256-CBC
 
@@ -24,7 +24,7 @@ export class CryptoDataEncryption {
   }
 
   // Function to decode encrypted email
-  public decryptEmail(content: string): string {
+  static decryptEmail(content: string): string {
     const [ivBase64, encryptedBase64] = content.split(':'); // Split the IV and encrypted content
     const iv = Buffer.from(ivBase64, 'base64'); // Decode the IV from base64
     const key = CryptoDataEncryption.generateKey(CryptoDataEncryption.secretKey); // Use hashed key
@@ -34,5 +34,12 @@ export class CryptoDataEncryption {
     decrypted += decipher.final('utf8');
 
     return decrypted; // Return the decrypted content
+  }
+
+  encryptEmail(content: string) {
+    return CryptoDataEncryption.encryptEmail(content);
+  }
+  decryptEmail(content: string) {
+    return CryptoDataEncryption.decryptEmail(content);
   }
 }

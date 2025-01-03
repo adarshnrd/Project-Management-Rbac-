@@ -1,5 +1,5 @@
 import { AppDataSource } from 'src/config';
-import { UserModel } from 'src/models/userModel';
+import { UserModel } from '#models/userModel';
 import { Repository, UpdateResult } from 'typeorm';
 
 export default class UserRepository {
@@ -20,5 +20,8 @@ export default class UserRepository {
   }
   public async update(userModel: Partial<UserModel>, email: string): Promise<UpdateResult> {
     return await this._userRepository.update({ email }, userModel);
+  }
+  public async delete(email: string): Promise<void> {
+    await this._userRepository.delete({ email });
   }
 }

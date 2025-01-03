@@ -12,7 +12,9 @@ export class UserSignUpDto {
     this.lastName = userSignUpRequest.lastName?.trim() ?? '';
     this.email = userSignUpRequest.email?.trim().toLocaleLowerCase();
     this.companyName = userSignUpRequest.companyName?.trim() ?? '';
-    this.phone = userSignUpRequest.phone?.trim() ?? '';
-    this.countryCode = userSignUpRequest.countryCode ?? '';
+    if (userSignUpRequest.phone) {
+      this.phone = userSignUpRequest.phone?.trim() ?? '';
+      this.countryCode = userSignUpRequest.countryCode ?? '';
+    }
   }
 }

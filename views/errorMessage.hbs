@@ -20,7 +20,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
         .container {
@@ -37,6 +36,10 @@
             color: #333;
             margin-bottom: 20px;
             font-size: 24px;
+        }
+
+        img {
+            margin-bottom: 20px;
         }
 
         .error-message {
@@ -71,13 +74,19 @@
 <body>
     <div class="container">
         <h1>Oops! Something went wrong</h1>
-        <img src="./images/warning.png" alt="Home" style="width: 32px; height: 32px;">
+        <img src="./images/warning.png" alt="Warning Icon" style="width: 32px; height: 32px;">
+
         <p class="error-message">{{errorMessage}}</p>
         {{#if errorDetails}}
         <p class="error-details">Details: {{errorDetails}}</p>
         {{/if}}
+
         <div class="back-link">
+            {{#if email}}
+            <a href="{{homeUrl}}?email={{email}}">Go back to the homepage</a>
+            {{else}}
             <a href="{{homeUrl}}">Go back to the homepage</a>
+            {{/if}}
         </div>
     </div>
 </body>

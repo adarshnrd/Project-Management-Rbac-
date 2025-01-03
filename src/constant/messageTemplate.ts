@@ -18,7 +18,7 @@ export const OTP_VERIFICATION_TEMPLATE = (otp: string) => {
         </style>
     </head>
         <body>  
-                <div style="background:#fff;max-width:700px;border-radius:20px;text-align:center;padding: 50px 20px 20px;margin: 0 auto;width: 100%;margin-top: 80px;border:2px solid #888888;border-bottom: solid 10px #888888;">
+                <div style="background:#fff;max-width:700px;border-radius:20px;text-align:center;padding: 50px 20px 20px;margin: 0 auto;width: 100%;margin-top: 80px;border:2px solid #FFA726;border-bottom: solid 10px #FFA726;">
                 <table width="100%" style="background:#fff;max-width:700px;text-align:center;width: 100%;margin: 0 auto;">
                     <tbody>
                       <tr> <td> &nbsp; </td> </tr>
