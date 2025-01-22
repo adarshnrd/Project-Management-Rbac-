@@ -7,8 +7,8 @@ export class userService {
   constructor(userRepository: UserRepository) {
     this._userRepository = userRepository;
   }
-  public async addUserData(userModel: UserModel): Promise<void> {
-    await this._userRepository.addUserData(userModel);
+  public async addUserData(userModel: UserModel): Promise<UserModel> {
+    return await this._userRepository.addUserData(userModel);
   }
   public async getUserData(email: string): Promise<UserModel | null> {
     return await this._userRepository.getUserData(email);

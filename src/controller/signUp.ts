@@ -10,6 +10,8 @@ import PmContext from '#src/helper/pmContext';
 import { generateOTP, sendErrorResponseWithErrorRenderPage } from '#utils/utils';
 import { CryptoDataEncryption } from '#utils/crypto';
 import { ResendPath } from '#src/enum/path';
+import { UserRoleModel } from '#models/userRoleModel';
+import { UserRoleEnumType } from '#src/enum/userRole';
 
 export default class SignUp {
   private _pmContext: PmContext;
@@ -30,7 +32,7 @@ export default class SignUp {
         const errorMessage = error.message;
         return sendErrorResponseWithErrorRenderPage(res, 403, errorMessage);
       }
-      const userModel = new UserModel();
+      let userModel = new UserModel();
       userModel.firstName = value.firstName;
       userModel.lastName = value.lastName;
       userModel.email = value.email;
@@ -38,8 +40,15 @@ export default class SignUp {
         userModel.phone = value.countryCode + value.phone;
       }
       userModel.companyName = value.companyName;
+      // const userRoleModel = new UserRoleModel();
+      // userRoleModel.role = UserRoleEnumType.Admin;
+      // userRoleModel.userModel = userModel;
+      // userModel.roleModel = userRoleModel;
       try {
-        await this._userService.addUserData(userModel);
+        userModel = await this._userService.addUserData(userModel);
+        const userRoleModel = new UserRoleModel();
+        userRoleModel.role = UserRoleEnumType.Admin;
+        await this._pmContext.userRoleService.addUserRole(userRoleModel, userModel);
       } catch (error) {
         const errorMessage = (error as Error)?.message;
         if (errorMessage.includes('Duplicate entry')) {

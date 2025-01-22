@@ -1,6 +1,7 @@
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity } from 'typeorm';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { ModelTemplate } from './modelTemplate';
 import { CryptoDataEncryption } from '#utils/crypto';
+import { UserRoleModel } from './userRoleModel';
 
 @Entity({ name: 'users' })
 export class UserModel extends ModelTemplate {
@@ -18,6 +19,10 @@ export class UserModel extends ModelTemplate {
   verifiedUser: boolean;
   @Column('varchar', { default: null })
   public password: string | null;
+
+  @OneToOne(() => UserRoleModel, (role) => role.userModel)
+  @JoinColumn()
+  roleModel: UserRoleModel;
 
   @BeforeInsert()
   @BeforeUpdate()

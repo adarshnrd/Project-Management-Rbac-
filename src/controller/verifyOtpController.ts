@@ -24,7 +24,7 @@ export class VerifyOtpController {
   public async verifyOtp(req: Request<VerifyOtpRequestParams>, res: Response) {
     const verifyOtpRequestParams = req.body;
     let decryptEmail = '';
-    const homeUrl = process.env.HOME_URL ?? `${DOMAIN_URL}:${APP_PORT}${PROJECT_ROUTES.SIGN_UP}`;
+    const homeUrl = process.env.HOME_URL ?? `${DOMAIN_URL}:${APP_PORT}${PROJECT_ROUTES.HOME_DEFAULT_PAGE}`;
     if (!verifyOtpRequestParams.email) {
       return sendErrorResponseWithErrorRenderPage(
         res,

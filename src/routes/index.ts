@@ -6,6 +6,8 @@ import validateTextPageRouter from './validationTextPage';
 import { otpVerifyRouter } from './verifyOtp';
 import createPasswordRouter from './createPassword';
 import { homePageRouter } from './homePage';
+import { forgotPasswordRouter } from './forgetPassword';
+import { timeLineSheetRouter } from './timeLineSheet';
 
 const router = Router();
 router.use(signInRouter);
@@ -14,5 +16,6 @@ router.use(validateTextPageRouter);
 router.use(otpVerifyRouter);
 router.use(createPasswordRouter);
 router.use(homePageRouter);
-
+router.use(forgotPasswordRouter);
+router.use(timeLineSheetRouter);
 export default router;

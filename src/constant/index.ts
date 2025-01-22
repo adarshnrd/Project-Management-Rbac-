@@ -2,6 +2,7 @@ export const PROJECT_ROUTES = {
   REVERIFICATION_PAGE: 'api/verificationPage',
   SIGN_UP: '/signUp',
   HOME_PAGE: '/homePage',
+  HOME_DEFAULT_PAGE: '/homeDefaultPage',
 };
 export const APP_PORT = process.env.PORT ?? 3978;
 export const DOMAIN_URL = process.env.DOMAIN_URL ?? 'http://localhost';

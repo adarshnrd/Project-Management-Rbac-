@@ -1,4 +1,6 @@
 import express, { Application, Request, Response } from 'express';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
 import { config } from 'dotenv';
 import path from 'path';
@@ -14,9 +16,29 @@ app.use(express.urlencoded({ extended: true }));
 app.disable('x-powered-by');
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '..', 'views'));
-app.use(express.static(path.join(__dirname, '..', 'views'))); //  "public" off of current is root
+app.use(express.static(path.join(__dirname, '..', 'views')));
+
+//session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET ?? `YouCanFindMeButCan'tAchieve`,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true, // Prevents client-side JavaScript from accessing the cookie
+      maxAge: process.env.SESSION_MAX_AGE ? Number(process.env.SESSION_MAX_AGE) : 24 * 60 * 60 * 1000, // 1 Day in milliseconds
+    },
+    store: MongoStore.create({
+      mongoUrl:
+        `${process.env.MONGO_DB_CONNECTION_STRING}${process.env.MONGO_DB_NAME}` ||
+        'mongodb://localhost:27017/session-db',
+    }),
+  }),
+);
 
 app.get('/', (_req: Request, res: Response) => {
+  // res.render('timesheetPage');
+  // return;
   res.status(200).send({ message: 'Hello To ProjectManagement' });
   return;
 });

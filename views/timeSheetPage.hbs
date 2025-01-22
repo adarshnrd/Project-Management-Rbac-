@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Sheet</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* Changed to flex-start to allow content to grow */
+            min-height: 100vh;
+            /* Ensure the body takes full height */
+            padding: 20px;
+            /* Add some padding */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 20px;
+            /* Add margin to the bottom */
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #007bff;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #4b47d9;
+        }
+
+        .table-wrapper {
+            max-height: 300px;
+            /* Adjust height for scrolling */
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f7fc;
+            color: #333;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            /* Make headers sticky when scrolling */
+            z-index: 1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Timeline Sheet</h1>
+        <form action="/submitTimeline" method="POST">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="projectName">Project Name</label>
+                <input type="text" id="projectName" name="projectName" required placeholder="Enter project name">
+            </div>
+            <div class="form-group">
+                <label for="workingPosition">Working Position</label>
+                <input type="text" id="workingPosition" name="workingPosition" required
+                    placeholder="Enter your position">
+            </div>
+            <div class="form-group">
+                <label for="description">Task Description</label>
+                <textarea id="description" name="description" required placeholder="Describe the task" rows="4"
+                    style="resize: vertical; max-height: 300px;"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="hoursSpent">Total Hours Spent</label>
+                <input type="number" id="hoursSpent" name="hoursSpent" required placeholder="Enter hours spent" min="0">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add to Timeline">
+            </div>
+        </form>
+
+        <h2>Timeline Entries Of Month</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Project Name</th>
+                        <th>Working Position</th>
+                        <th>Description</th>
+                        <th>Total Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each timelineEntries}}
+                    <tr>
+                        <td>{{this.date}}</td>
+                        <td>{{this.projectName}}</td>
+                        <td>{{this.workingPosition}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.hoursSpent}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -8,8 +8,8 @@ export default class UserRepository {
     this._userRepository = AppDataSource.getRepository(UserModel);
   }
 
-  public async addUserData(userModel: UserModel): Promise<void> {
-    await this._userRepository.save(userModel);
+  public async addUserData(userModel: UserModel): Promise<UserModel> {
+    return await this._userRepository.save(userModel);
   }
   public async getUserData(email: string): Promise<UserModel | null> {
     return await this._userRepository.findOne({

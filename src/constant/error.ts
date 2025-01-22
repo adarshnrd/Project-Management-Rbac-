@@ -23,3 +23,4 @@ export const ENTERED_WRONG_USER_PASSWORD = (count: number) =>
   count < 3
     ? `Incorrect password. Please try again.`
     : `The password you entered is incorrect. Please check your password and try again. If you've forgotten your password, click on 'Forgot Password' to reset it.`;
+export const UNABLE_TO_FIND_USER_ACCOUNT = `We couldn't find an account associated with this email. Please create a new account or contact the administrator for assistance.`;

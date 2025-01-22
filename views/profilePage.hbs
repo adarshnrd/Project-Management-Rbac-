@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .profile-container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .details h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .details p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .role {
+            background-color: #ffcccb;
+            color: #c00;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .tabs ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tabs li {
+            margin-right: 20px;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .tabs .active {
+            border-bottom: 3px solid #007bff;
+            color: #007bff;
+        }
+
+        .content {
+            padding: 20px 0;
+        }
+
+        .content h2 {
+            margin: 20px 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .content p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .content strong {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="header">
+            <div class="avatar">
+                <span>{{user.firstName.charAt 0}}</span>
+            </div>
+            <div class="details">
+                <h1>{{user.firstName}} {{user.lastName}}</h1>
+                <p>{{user.email}}</p>
+                <span class="role">{{user.role}}</span>
+            </div>
+        </div>
+        <div class="tabs">
+            <ul>
+                <li class="active">Profile</li>
+                <!-- Removed the "Security" tab as per your request -->
+            </ul>
+        </div>
+        <div class="content">
+            <h2>Work Information</h2>
+            <p><strong>First Name:</strong> {{user.firstName}}</p>
+            <p><strong>Last Name:</strong> {{user.lastName}}</p>
+            <p><strong>Company Name:</strong> {{user.companyName}}</p>
+
+            <h2>Other Information</h2>
+            <p><strong>Language:</strong> {{user.language}}</p>
+            <p><strong>Time Zone:</strong> {{user.timeZone}}</p>
+            <p><strong>Facebook:</strong> {{user.facebook}}</p>
+            <p><strong>LinkedIn:</strong> {{user.linkedin}}</p>
+            <p><strong>Twitter:</strong> {{user.twitter}}</p>
+        </div>
+    </div>
+</body>
+
+</html>
