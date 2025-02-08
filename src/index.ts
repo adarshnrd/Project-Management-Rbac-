@@ -37,8 +37,6 @@ app.use(
 );
 
 app.get('/', (_req: Request, res: Response) => {
-  // res.render('timesheetPage');
-  // return;
   res.status(200).send({ message: 'Hello To ProjectManagement' });
   return;
 });

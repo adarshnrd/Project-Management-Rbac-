@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { range } from 'lodash';
 
 import { OTP_GENERATE_NUMBER } from '#src/constant';
 import { GenerateOtpResponse } from '#src/types/brevoEmail';
@@ -24,4 +25,9 @@ export function sendErrorResponseWithErrorRenderPage(
   homeUrl?: string,
 ): void {
   return res.status(errorCode).render('errorMessage', { errorMessage, errorDetails, email, homeUrl });
+}
+
+export function getYearInRange(startYear: number) {
+  const currentYear = new Date().getFullYear() + 1;
+  return range(startYear, currentYear);
 }

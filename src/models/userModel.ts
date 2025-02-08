@@ -1,7 +1,8 @@
-import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { ModelTemplate } from './modelTemplate';
 import { CryptoDataEncryption } from '#utils/crypto';
 import { UserRoleModel } from './userRoleModel';
+import { TimeSheetModel } from './timeSheetModel';
 
 @Entity({ name: 'users' })
 export class UserModel extends ModelTemplate {
@@ -23,6 +24,8 @@ export class UserModel extends ModelTemplate {
   @OneToOne(() => UserRoleModel, (role) => role.userModel)
   @JoinColumn()
   roleModel: UserRoleModel;
+
+  @OneToMany(()=> TimeSheetModel,(timeSheet)=>timeSheet.)
 
   @BeforeInsert()
   @BeforeUpdate()
