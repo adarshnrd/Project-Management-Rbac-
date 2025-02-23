@@ -25,7 +25,9 @@ export class UserModel extends ModelTemplate {
   @JoinColumn()
   roleModel: UserRoleModel;
 
-  @OneToMany(()=> TimeSheetModel,(timeSheet)=>timeSheet.)
+  @OneToMany(() => TimeSheetModel, (timeline) => timeline.user)
+  timelines: TimeSheetModel[];
+
 
   @BeforeInsert()
   @BeforeUpdate()

@@ -15,5 +15,6 @@ export class TimeSheetModel extends ModelTemplate {
   @Column('int', { nullable: false })
   hoursSpent: number;
 
-  @ManyToOne(()=>UserModel)
+  @ManyToOne(() => UserModel, (user) => user.timelines, { onDelete: "CASCADE" })
+  user: UserModel;
 }

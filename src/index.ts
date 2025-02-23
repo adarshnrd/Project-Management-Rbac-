@@ -4,7 +4,6 @@ import MongoStore from 'connect-mongo';
 
 import { config } from 'dotenv';
 import path from 'path';
-
 import router from './routes';
 import { AppDataSource } from './config';
 import { APP_PORT } from './constant';
