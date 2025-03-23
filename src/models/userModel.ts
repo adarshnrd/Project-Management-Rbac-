@@ -28,7 +28,6 @@ export class UserModel extends ModelTemplate {
   @OneToMany(() => TimeSheetModel, (timeline) => timeline.user)
   timelines: TimeSheetModel[];
 
-
   @BeforeInsert()
   @BeforeUpdate()
   async encryptPass() {

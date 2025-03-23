@@ -7,9 +7,13 @@
     <title>Project Management Home</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+        body,
+        html {
             margin: 0;
+            padding: 0;
+            height: 100%;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         .container {
@@ -18,7 +22,10 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: url('./images/homePageBG.png') no-repeat center center/cover;
+            width: 100%;
+            background: url('./images/homePageBG.png') no-repeat center center;
+            background-size: cover;
+            position: relative;
         }
 
         .navbar {
@@ -29,6 +36,7 @@
             padding: 10px 20px;
             position: absolute;
             top: 0;
+            box-sizing: border-box;
         }
 
         .navbar a {
@@ -45,6 +53,7 @@
         .content {
             color: white;
             text-align: center;
+            z-index: 1;
         }
 
         .content h1 {

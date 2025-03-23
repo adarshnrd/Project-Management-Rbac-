@@ -1,5 +1,5 @@
-import { userService } from '#service/userService';
-import { APP_PORT, DOMAIN_URL, OTP_CACHE_KEY, PROJECT_ROUTES } from '#src/constant';
+import { UserService } from '#service/userService';
+import { OTP_CACHE_KEY, HOME_PAGE_URL } from '#src/constant';
 import { ERROR_CODES_MESSAGE, OTP_MAX_ATTEMPTED_ERROR_MESSAGE, SOMETHING_WENT_WRONG } from '#src/constant/error';
 import { ResendPath } from '#src/enum/path';
 import PmCache from '#src/helper/pmCache';
@@ -12,19 +12,18 @@ import { Request, Response } from 'express';
 
 export class VerifyOtpController {
   private _userRepository: UserRepository;
-  private _userService: userService;
+  private _userService: UserService;
   private _pmContext: PmContext;
   private _cryptoDataEncryption: CryptoDataEncryption;
   constructor() {
     this._userRepository = new UserRepository();
-    this._userService = new userService(this._userRepository);
+    this._userService = new UserService(this._userRepository);
     this._pmContext = new PmContext();
     this._cryptoDataEncryption = new CryptoDataEncryption();
   }
   public async verifyOtp(req: Request<VerifyOtpRequestParams>, res: Response) {
     const verifyOtpRequestParams = req.body;
     let decryptEmail = '';
-    const homeUrl = process.env.HOME_URL ?? `${DOMAIN_URL}:${APP_PORT}${PROJECT_ROUTES.HOME_DEFAULT_PAGE}`;
     if (!verifyOtpRequestParams.email) {
       return sendErrorResponseWithErrorRenderPage(
         res,
@@ -32,7 +31,7 @@ export class VerifyOtpController {
         ERROR_CODES_MESSAGE[400],
         SOMETHING_WENT_WRONG,
         undefined,
-        homeUrl,
+        HOME_PAGE_URL,
       );
     }
     decryptEmail = this._cryptoDataEncryption.decryptEmail(verifyOtpRequestParams.email);
@@ -63,7 +62,7 @@ export class VerifyOtpController {
         ERROR_CODES_MESSAGE[400],
         OTP_MAX_ATTEMPTED_ERROR_MESSAGE,
         undefined,
-        homeUrl,
+        HOME_PAGE_URL,
       );
     }
     const cacheDeleted = expiryTimeInMins - currentTime;

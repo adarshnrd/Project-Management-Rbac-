@@ -1,8 +1,9 @@
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, Index } from 'typeorm';
 import { ModelTemplate } from './modelTemplate';
 import { UserModel } from './userModel';
 
 @Entity({ name: 'timeSheet' })
+@Index(['date', 'user'], { unique: true })
 export class TimeSheetModel extends ModelTemplate {
   @Column('date', { nullable: false })
   date: Date;
@@ -15,6 +16,6 @@ export class TimeSheetModel extends ModelTemplate {
   @Column('int', { nullable: false })
   hoursSpent: number;
 
-  @ManyToOne(() => UserModel, (user) => user.timelines, { onDelete: "CASCADE" })
+  @ManyToOne(() => UserModel, (user) => user.timelines, { onDelete: 'CASCADE' })
   user: UserModel;
 }

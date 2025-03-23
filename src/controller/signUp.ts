@@ -5,7 +5,7 @@ import { ERROR_CODES_MESSAGE, ERROR_MESSAGE_FOR_DUPLICATE_EMAIL_ENTRY } from '#s
 import { UserSignUpDto } from '#src/dto/userSignUpDto';
 import { UserSchema } from '#src/joi/userSchema';
 import { UserModel } from '#models/userModel';
-import { userService } from 'src/service/userService';
+import { UserService } from 'src/service/userService';
 import PmContext from '#src/helper/pmContext';
 import { generateOTP, sendErrorResponseWithErrorRenderPage } from '#utils/utils';
 import { CryptoDataEncryption } from '#utils/crypto';
@@ -15,7 +15,7 @@ import { UserRoleEnumType } from '#src/enum/userRole';
 
 export default class SignUp {
   private _pmContext: PmContext;
-  private _userService: userService;
+  private _userService: UserService;
   constructor(pmContext: PmContext) {
     this._pmContext = pmContext;
     this._userService = pmContext.userService;

@@ -1,6 +1,6 @@
 import { TimeSheetModel } from '#models/timeSheetModel';
 import { AppDataSource } from '#src/config';
-import { Repository } from 'typeorm';
+import { Between, InsertResult, Repository } from 'typeorm';
 
 export class TimeSheetRepository {
   private _timeSheetRepository: Repository<TimeSheetModel>;
@@ -8,8 +8,18 @@ export class TimeSheetRepository {
     this._timeSheetRepository = AppDataSource.getRepository(TimeSheetModel);
   }
 
-  public async save(timeSheetModel: TimeSheetModel) {
-    await this._timeSheetRepository.save(timeSheetModel);
+  public async addAndUpdate(timeSheetModel: TimeSheetModel): Promise<InsertResult> {
+    return await this._timeSheetRepository.upsert(timeSheetModel, ['date', 'user']);
   }
-  //   public async find()
+
+  public async getTimeSheetData(email: string, year: number, month: number): Promise<TimeSheetModel[]> {
+    return await this._timeSheetRepository.find({
+      where: {
+        user: {
+          email: email,
+        },
+        date: Between(new Date(`${year}-${month}-01`), new Date(`${year}-${month}-31`)),
+      },
+    });
+  }
 }

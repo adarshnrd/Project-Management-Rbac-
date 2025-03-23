@@ -35,6 +35,40 @@
             padding: 40px;
             margin-bottom: 20px;
             /* Add margin to the bottom */
+            position: relative;
+        }
+
+        .home-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            background-color: #4b47d9;
+        }
+
+        .alert {
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
         h1,
@@ -133,8 +167,14 @@
 
 <body>
     <div class="container">
+        <a href="/homePage" class="home-btn">🏠 Home</a>
         <h1>Timeline Sheet</h1>
-        <form action="/submitTimeline" method="POST">
+
+        <div id="success-alert" class="alert alert-success" style="display: none;">
+            Timesheet has been successfully saved!
+        </div>
+
+        <form id="timesheet-form" action="/submitTimeline" method="POST">
             <div class="form-group">
                 <label for="date">Date</label>
                 <input type="date" id="date" name="date" required>
@@ -188,6 +228,44 @@
             </table>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('timesheet-form');
+            const successAlert = document.getElementById('success-alert');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+
+                fetch('/submitTimeline', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Show success message
+                        successAlert.style.display = 'block';
+
+                        // Reset form
+                        form.reset();
+
+                        // Hide success message after 3 seconds
+                        setTimeout(function () {
+                            successAlert.style.display = 'none';
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('There was an error saving your timesheet. Please try again.');
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>

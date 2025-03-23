@@ -17,5 +17,6 @@ timeLineSheetRouter.get('/AddTimeSheetPage', (req: Request, res: Response) => {
 });
 
 timeLineSheetRouter.post('/submitTimeline', (req: Request, res: Response) => {
-  return new TimeSheetController().processTimeSheetData(req, res);
+  new TimeSheetController().processTimeSheetData(req, res);
+  return;
 });

@@ -4,7 +4,7 @@ export const PROJECT_ROUTES = {
   HOME_PAGE: '/homePage',
   HOME_DEFAULT_PAGE: '/homeDefaultPage',
 };
-export const APP_PORT = process.env.PORT ?? 3978;
+export const APP_PORT = process.env.PORT ?? 3979;
 export const DOMAIN_URL = process.env.DOMAIN_URL ?? 'http://localhost';
 export const OTP_GENERATE_NUMBER = '0123456789';
 export const SENDER_EMAIL = process.env.BREVO_API_SENDER_EMAIL ?? 'adarshvcp@gmail.com';
@@ -16,3 +16,5 @@ export const BREVO_BASE_URL = process.env.BREVO_BASE_URL ?? 'https://api.brevo.c
 export const OTP_CACHE_KEY = (email: string) => `userOtp${email}`;
 export const USER_PASS_ALREADY_PROCESSED = (email: string) => `userPassWordAlreadyProcessed${email}`;
 export const USER_PASS_ENTER_COUNT_CACHE_KEY = (email: string) => `userPassWordEnterCount${email}`;
+
+export const HOME_PAGE_URL = process.env.HOME_URL ?? `${DOMAIN_URL}:${APP_PORT}${PROJECT_ROUTES.HOME_DEFAULT_PAGE}`;

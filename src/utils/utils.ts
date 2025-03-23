@@ -28,6 +28,6 @@ export function sendErrorResponseWithErrorRenderPage(
 }
 
 export function getYearInRange(startYear: number) {
-  const currentYear = new Date().getFullYear() + 1;
+  const currentYear = new Date().getFullYear() + 2;
   return range(startYear, currentYear);
 }

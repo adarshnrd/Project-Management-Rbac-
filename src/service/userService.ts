@@ -2,7 +2,7 @@ import { UserModel } from '#models/userModel';
 import UserRepository from 'src/repository/userRepository';
 import { UpdateResult } from 'typeorm';
 
-export class userService {
+export class UserService {
   private _userRepository: UserRepository;
   constructor(userRepository: UserRepository) {
     this._userRepository = userRepository;
