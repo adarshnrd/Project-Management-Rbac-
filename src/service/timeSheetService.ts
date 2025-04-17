@@ -1,13 +1,12 @@
 import { TimeSheetModel } from '#models/timeSheetModel';
 import { TimeSheetRepository } from '#src/repository/timeSheetRepository';
-import { InsertResult } from 'typeorm';
 
 export class TimeSheetService {
   private _timeSheetRepository: TimeSheetRepository;
   constructor() {
     this._timeSheetRepository = new TimeSheetRepository();
   }
-  public async addAndUpdate(timeSheetModel: TimeSheetModel): Promise<InsertResult> {
+  public async addAndUpdate(timeSheetModel: TimeSheetModel): Promise<void> {
     return await this._timeSheetRepository.addAndUpdate(timeSheetModel);
   }
 

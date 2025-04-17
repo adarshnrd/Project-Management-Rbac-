@@ -1,6 +1,7 @@
 import { TimeSheetModel } from '#models/timeSheetModel';
 import { AppDataSource } from '#src/config';
-import { Between, InsertResult, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
+import { insertQueryBuilderForModels, upsertForInsertQueryBuilder } from '#utils/typeorm';
 
 export class TimeSheetRepository {
   private _timeSheetRepository: Repository<TimeSheetModel>;
@@ -8,8 +9,12 @@ export class TimeSheetRepository {
     this._timeSheetRepository = AppDataSource.getRepository(TimeSheetModel);
   }
 
-  public async addAndUpdate(timeSheetModel: TimeSheetModel): Promise<InsertResult> {
-    return await this._timeSheetRepository.upsert(timeSheetModel, ['date', 'user']);
+  public async addAndUpdate(timeSheetModel: TimeSheetModel): Promise<void> {
+    const insertQueryBuilder = insertQueryBuilderForModels([timeSheetModel]);
+    const upsertQueryBuilder = upsertForInsertQueryBuilder(TimeSheetModel, insertQueryBuilder, {
+      criteriaProperties: ['date', 'userKey', 'projectName'],
+    });
+    await upsertQueryBuilder.execute();
   }
 
   public async getTimeSheetData(email: string, year: number, month: number): Promise<TimeSheetModel[]> {

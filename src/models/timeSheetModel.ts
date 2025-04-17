@@ -3,7 +3,7 @@ import { ModelTemplate } from './modelTemplate';
 import { UserModel } from './userModel';
 
 @Entity({ name: 'timeSheet' })
-@Index(['date', 'user'], { unique: true })
+@Index(['date', 'userKey', 'projectName'], { unique: true })
 export class TimeSheetModel extends ModelTemplate {
   @Column('date', { nullable: false })
   date: Date;
@@ -15,6 +15,9 @@ export class TimeSheetModel extends ModelTemplate {
   workingPosition: string;
   @Column('int', { nullable: false })
   hoursSpent: number;
+
+  @Column('int', { nullable: false })
+  userKey: number;
 
   @ManyToOne(() => UserModel, (user) => user.timelines, { onDelete: 'CASCADE' })
   user: UserModel;

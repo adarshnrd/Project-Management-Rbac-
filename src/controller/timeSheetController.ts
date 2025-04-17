@@ -63,22 +63,16 @@ export class TimeSheetController {
           HOME_PAGE_URL,
         );
       }
-      newTimeSheetModel.user = user;
+      newTimeSheetModel.userKey = user.key;
       await this._timeSheetService.addAndUpdate(newTimeSheetModel);
-      return res.render('timeSheetPage');
+      // Return JSON response for fetch API
+      return res.json({ success: true, message: 'Timesheet saved successfully' });
     } catch (error) {
       this._pmContext.logger.error({
         error,
         message: 'Error in processing time sheet data.',
       });
-      return sendErrorResponseWithErrorRenderPage(
-        res,
-        500,
-        ERROR_CODES_MESSAGE[500],
-        undefined,
-        undefined,
-        HOME_PAGE_URL,
-      );
+      return res.status(500).json({ success: false, message: ERROR_CODES_MESSAGE[500] });
     }
   }
 }
